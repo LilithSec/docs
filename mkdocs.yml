@@ -1,0 +1,100 @@
+site_name: LilithSec
+site_description: Documentation for the LilithSec pantheon.
+site_url: https://lilithsec.github.io/docs/
+repo_url: https://github.com/LilithSec/docs
+edit_uri: ""
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: deep purple
+    accent: purple
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.tracking
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+# Rewrites github.com/<org>/<repo> cross-links into internal section links when
+# that repo is part of this site. Keyed on bare repo name, so it survives both
+# the LilithSec<->VVelox org drift and the Plugtools->Nissaba rename.
+hooks:
+  - hooks/pantheon_links.py
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+# The per-component sections below (lilith/, lilu/, ...) are populated by
+# scripts/sync-docs.sh, which pulls each repo's docs/ dir. Run that before
+# building. Page titles come from each page's H1, so only paths are listed.
+# Virani is authored locally in docs/virani/ (no upstream docs/ yet).
+nav:
+  - Home: index.md
+  - The Pantheon: pantheon.md
+  - Lilith:
+      - lilith/index.md
+      - lilith/architecture.md
+      - lilith/install.md
+      - lilith/configuration.md
+      - lilith/usage.md
+      - lilith/escalation.md
+      - lilith/security.md
+      - lilith/examples.md
+  - Lilu:
+      - lilu/index.md
+      - lilu/architecture.md
+      - lilu/install.md
+      - lilu/configuration.md
+      - lilu/usage.md
+  - Baphomet:
+      - baphomet/index.md
+      - baphomet/architecture.md
+      - baphomet/install.md
+      - baphomet/configuration.md
+      - baphomet/rules.md
+      - baphomet/rules-catalog.md
+      - baphomet/eve.md
+      - baphomet/usage.md
+      - baphomet/examples.md
+      - baphomet/fail2ban.md
+  - Ereshkigal:
+      - ereshkigal/index.md
+      - ereshkigal/architecture.md
+      - ereshkigal/install.md
+      - ereshkigal/configuration.md
+      - ereshkigal/usage.md
+      - ereshkigal/security.md
+      - ereshkigal/examples.md
+  - Lamashtu:
+      - lamashtu/index.md
+      - lamashtu/architecture.md
+      - lamashtu/install.md
+      - lamashtu/configuration.md
+      - lamashtu/usage.md
+      - lamashtu/security.md
+      - lamashtu/examples.md
+  - Virani:
+      - virani/index.md
+  - Nisaba:
+      - nisaba/index.md
+      - nisaba/architecture.md
+      - nisaba/install.md
+      - nisaba/configuration.md
+      - nisaba/usage.md
+      - nisaba/schemas.md
+      - nisaba/security.md
+      - nisaba/selfservice.md
+      - nisaba/web.md
+      - nisaba/Sukkal.md
+      - nisaba/examples.md
