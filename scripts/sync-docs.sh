@@ -5,8 +5,7 @@
 # (only the docs/ tree is fetched). Run this before `mkdocs build` or serve.
 #
 # The synced section dirs are git-ignored (see .gitignore) — they are build
-# inputs, regenerated from their home repos. docs/virani/ is the exception: it
-# is authored here (Virani has no upstream docs/ yet) and is NOT touched.
+# inputs, regenerated from their home repos.
 #
 set -euo pipefail
 export GIT_TERMINAL_PROMPT=0   # never hang on an auth prompt; fail fast instead
@@ -21,6 +20,7 @@ REPOS=(
   "baphomet    VVelox/Baphomet         main"
   "ereshkigal  LilithSec/Ereshkigal    main"
   "lamashtu    LilithSec/Lamashtu      main"
+  "virani      LilithSec/Virani        main"
   "nisaba      VVelox/Plugtools        dev"    # docs live on dev; -> LilithSec/Nissaba after rename
 )
 
@@ -44,4 +44,4 @@ for entry in "${REPOS[@]}"; do
   echo "   files: $(cd "$DOCS/$section" && ls | tr '\n' ' ')"
 done
 
-echo "Done. (docs/virani is authored locally and was not synced.)"
+echo "Done."

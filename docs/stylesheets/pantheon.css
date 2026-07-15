@@ -1,0 +1,303 @@
+/* Pantheon theme — deep purple + gold/amber on a purple-tinted dark slate.
+ *
+ * Layered over Material's built-in `slate` scheme (set in mkdocs.yml) so all
+ * dark-mode surface, text, and code handling is inherited. We only:
+ *   - re-tint the generated slate grays toward purple (default slate hue is
+ *     blue, ~232), and
+ *   - swap the primary to deep purple and the accent + links to gold/amber.
+ */
+
+/* Cinzel — self-hosted display serif for headings (SIL OFL 1.1; license in
+ * docs/fonts/OFL-Cinzel.txt). It's a variable font, so one file per subset
+ * covers the whole 400-700 weight range. Paths are relative to this stylesheet.
+ * No remote fonts or JS are used: Material's Google Fonts loader is disabled via
+ * `theme.font: false` in mkdocs.yml, so the body/nav/code stack stays local too. */
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/cinzel-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../fonts/cinzel-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Cinzel Decorative — the flourished companion to Cinzel, used only for the
+ * masthead title so the site name reads as an engraved sigil (SIL OFL 1.1;
+ * license in docs/fonts/OFL-CinzelDecorative.txt). Static font; only the bold
+ * (700) weight is shipped, since the masthead is a single short string. */
+@font-face {
+  font-family: "Cinzel Decorative";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/cinzel-decorative-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cinzel Decorative";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/cinzel-decorative-700-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Cinzel for section headings; body, nav, and code keep Material's local
+ * fallback stack. */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: "Cinzel", Georgia, "Times New Roman", serif;
+}
+
+/* Cinzel Decorative for the masthead site title only. */
+.md-header__topic > .md-ellipsis {
+  font-family: "Cinzel Decorative", "Cinzel", Georgia, serif;
+  font-weight: 700;
+  /* Blood red masthead title. */
+  color: var(--pantheon-blood);
+}
+
+/* Blood red search field (typed text + placeholder + icon) and the GitHub
+ * repo link in the masthead. */
+.md-search__input,
+.md-search__input::placeholder,
+.md-search__icon,
+.md-header__source .md-source {
+  color: var(--pantheon-blood);
+}
+
+[data-md-color-scheme="slate"] {
+  /* Purple-tint the auto-generated slate grays (backgrounds, surfaces, rules). */
+  --md-hue: 270;
+
+  /* Deep purple — header, active nav, primary buttons. */
+  --md-primary-fg-color:        #5e35b1;
+  --md-primary-fg-color--light: #7e57c2;
+  --md-primary-fg-color--dark:  #4527a0;
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.7);
+
+  /* Gold / amber accent — link hover, focus rings, selection, active markers. */
+  --md-accent-fg-color:              #e8b923;
+  --md-accent-fg-color--transparent: rgba(232, 185, 35, 0.1);
+
+  /* Body links: a softer gold that brightens to the accent on hover (Material
+   * already maps a:hover -> --md-accent-fg-color). */
+  --md-typeset-a-color: #d9b44a;
+
+  /* Lapis lazuli + a fixed gold, for the Sumerian gold-and-lapis "inlay"
+   * elements below (blockquotes, admonitions, rules, table headers). The gold
+   * is its own variable rather than the accent, so inlay borders stay gold on
+   * every deity page instead of shifting with the per-deity accent. */
+  --pantheon-lapis:      #2a5e9e;
+  --pantheon-lapis-deep: #1b3f70;
+  --pantheon-gold:       #e8b923;
+
+  /* Pantheon blood — the masthead title, search field, GitHub link, and table
+   * header text. */
+  --pantheon-blood:      #a60b11;
+
+  /* Gold-pyrite-in-lapis texture, shared by the chrome and table headers: a
+   * lapis gradient base overlaid with scattered gold dots. Each radial-gradient
+   * is ONE dot that tile-repeats at its own background-size, so each layer is a
+   * regular grid; the scatter comes from giving every layer a *prime*, mutually
+   * coprime tile size, which pushes the combined repeat period (the LCM of all
+   * sizes) far off-screen. More layers -> more dots; more-coprime sizes + varied
+   * positions/radii/opacity -> less grid-like. Apply both together:
+   *   background-image: var(--pantheon-fleck);
+   *   background-size:  var(--pantheon-fleck-size); */
+  --pantheon-fleck:
+    radial-gradient(circle at 18% 28%, rgba(232, 185, 35, 0.55) 0 1px,   transparent 1.8px),
+    radial-gradient(circle at 68% 62%, rgba(232, 185, 35, 0.40) 0 1px,   transparent 1.8px),
+    radial-gradient(circle at 43% 82%, rgba(245, 220, 130, 0.35) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 88% 16%, rgba(232, 185, 35, 0.45) 0 1px,   transparent 1.8px),
+    radial-gradient(circle at 8%  70%, rgba(245, 220, 130, 0.30) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 31% 47%, rgba(232, 185, 35, 0.50) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 57% 12%, rgba(245, 220, 130, 0.33) 0 0.7px, transparent 1.4px),
+    radial-gradient(circle at 77% 88%, rgba(232, 185, 35, 0.42) 0 0.9px, transparent 1.6px),
+    radial-gradient(circle at 4%  38%, rgba(232, 185, 35, 0.38) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 96% 54%, rgba(245, 220, 130, 0.32) 0 0.7px, transparent 1.4px),
+    radial-gradient(circle at 24% 94%, rgba(232, 185, 35, 0.44) 0 1px,   transparent 1.7px),
+    radial-gradient(circle at 62% 34%, rgba(245, 220, 130, 0.28) 0 0.6px, transparent 1.3px),
+    linear-gradient(135deg, var(--pantheon-lapis-deep), var(--pantheon-lapis));
+  --pantheon-fleck-size:
+    113px 83px, 89px 127px, 167px 97px, 71px 61px, 149px 131px,
+    103px 79px, 137px 109px, 59px 173px, 181px 67px, 101px 139px,
+    73px 151px, 157px 53px, cover;
+}
+
+/* Per-deity accents.
+ *
+ * hooks/pantheon_links.py stamps <body data-deity="<slug>"> on every page under
+ * a component's section. Each block below re-tints just the accent + links to a
+ * color drawn from that deity's mythology, while the deep-purple chrome stays
+ * constant across the site. These rules follow the base slate block above, so
+ * they win on equal specificity. Nisaba (grain/scribe goddess) keeps the gold.
+ */
+
+/* Lilith — night demoness, screech owl, blood-red. */
+[data-deity="lilith"] {
+  --md-accent-fg-color:              #ff5470;
+  --md-accent-fg-color--transparent: rgba(255, 84, 112, 0.1);
+  --md-typeset-a-color:              #ff738d;
+}
+
+/* Lilu — incubus counterpart, violet-magenta. */
+[data-deity="lilu"] {
+  --md-accent-fg-color:              #c77dff;
+  --md-accent-fg-color--transparent: rgba(199, 125, 255, 0.1);
+  --md-typeset-a-color:              #d59bff;
+}
+
+/* Baphomet — the torch between the horns, ember orange. */
+[data-deity="baphomet"] {
+  --md-accent-fg-color:              #ff7a3d;
+  --md-accent-fg-color--transparent: rgba(255, 122, 61, 0.1);
+  --md-typeset-a-color:              #ff9560;
+}
+
+/* Ereshkigal — queen of the underworld Kur, cold cyan. */
+[data-deity="ereshkigal"] {
+  --md-accent-fg-color:              #4fd1c5;
+  --md-accent-fg-color--transparent: rgba(79, 209, 197, 0.1);
+  --md-typeset-a-color:              #6fdcd2;
+}
+
+/* Lamashtu — pestilence demoness, sickly green. */
+[data-deity="lamashtu"] {
+  --md-accent-fg-color:              #9ccc65;
+  --md-accent-fg-color--transparent: rgba(156, 204, 101, 0.1);
+  --md-typeset-a-color:              #b2d98a;
+}
+
+/* Virani — electric blue. */
+[data-deity="virani"] {
+  --md-accent-fg-color:              #5c9dff;
+  --md-accent-fg-color--transparent: rgba(92, 157, 255, 0.1);
+  --md-typeset-a-color:              #82b4ff;
+}
+
+/* Nisaba — goddess of grain, writing and wisdom; keeps the pantheon gold. */
+[data-deity="nisaba"] {
+  --md-accent-fg-color:              #e8b923;
+  --md-accent-fg-color--transparent: rgba(232, 185, 35, 0.1);
+  --md-typeset-a-color:              #d9b44a;
+}
+
+/* Tint section headings to the active deity's accent. The h1 (section/page
+ * title) takes the full accent color; h2/h3 keep legible default text but get an
+ * accent-tinted rule beneath them as section dividers (h3 a touch lighter than
+ * h2). The dividers derive their tint from the accent via color-mix(), so
+ * nothing is repeated per deity, and root pages (no data-deity) keep Material's
+ * default heading colors. */
+[data-deity] .md-typeset h1 {
+  color: var(--md-accent-fg-color);
+}
+
+[data-deity] .md-typeset h2 {
+  border-bottom: 0.05rem solid
+    color-mix(in srgb, var(--md-accent-fg-color) 55%, transparent);
+  padding-bottom: 0.2rem;
+}
+
+[data-deity] .md-typeset h3 {
+  border-bottom: 0.04rem solid
+    color-mix(in srgb, var(--md-accent-fg-color) 35%, transparent);
+  padding-bottom: 0.15rem;
+}
+
+/* Per-deity nav tint.
+ *
+ * The [data-deity] rules above only color the *current* page's section, because
+ * hooks/pantheon_links.py stamps <body data-deity> with the page you're on. The
+ * nav lists every deity on every page, so those entries would otherwise all show
+ * the current page's accent. Here we tint each nav link off its own target
+ * section instead — parsed from the link href, which carries the slug (e.g.
+ * "lilith/", "../../baphomet/") — so every deity shows its color without having
+ * to visit that page first. Slugs are mutually distinct substrings, so there are
+ * no cross-matches. Colors reuse each deity's lighter link tone from above.
+ *
+ * Edge case: within a section, that section's own child links render relative and
+ * drop the slug ("../usage/"), so they won't match here — but that section is the
+ * active one, already colored via body[data-deity], so the two cover each other. */
+.md-nav__link[href*="lilith/"]     { --nav-accent: #ff738d; }
+.md-nav__link[href*="lilu/"]       { --nav-accent: #d59bff; }
+.md-nav__link[href*="baphomet/"]   { --nav-accent: #ff9560; }
+.md-nav__link[href*="ereshkigal/"] { --nav-accent: #6fdcd2; }
+.md-nav__link[href*="lamashtu/"]   { --nav-accent: #b2d98a; }
+.md-nav__link[href*="virani/"]     { --nav-accent: #82b4ff; }
+.md-nav__link[href*="nisaba/"]     { --nav-accent: #d9b44a; }
+
+.md-nav__link { color: var(--nav-accent, inherit); }
+
+/* Lapis-and-gold inlays.
+ *
+ * Sumerian craft set lapis lazuli into gold frames (the Standard of Ur, Puabi's
+ * jewelry). These rules echo that on the "framing" content elements while the
+ * deep-purple chrome and per-deity accents stay untouched. Lapis stays on
+ * neutral elements only, so it never collides with the blue-ish deity accents
+ * (Ereshkigal, Virani). */
+
+/* Blockquotes — a lapis panel set behind a gold left edge. */
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  border-left: 0.2rem solid var(--pantheon-gold);
+  border-radius: 0.1rem;
+  background-color: color-mix(in srgb, var(--pantheon-lapis) 20%, transparent);
+}
+
+/* Admonitions / details — a faint lapis wash on the body, while each block
+ * keeps its native semantic border and title color (note, warning, danger…). */
+[data-md-color-scheme="slate"] .md-typeset .admonition,
+[data-md-color-scheme="slate"] .md-typeset details {
+  background-color:
+    color-mix(in srgb, var(--pantheon-lapis) 12%, var(--md-default-bg-color));
+}
+
+/* Horizontal rules — a gold-to-lapis inlay line rather than a flat gray rule. */
+[data-md-color-scheme="slate"] .md-typeset hr {
+  border: none;
+  height: 0.1rem;
+  background: linear-gradient(
+    to right,
+    var(--pantheon-gold),
+    var(--pantheon-lapis) 40%,
+    transparent
+  );
+}
+
+/* Table headers — a lapis band, flecked with gold like the chrome, underlined
+ * in gold, with blood-red header text. */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: var(--pantheon-lapis-deep);
+  background-image: var(--pantheon-fleck);
+  background-size: var(--pantheon-fleck-size);
+  color: var(--pantheon-blood);
+  border-bottom: 0.1rem solid var(--pantheon-gold);
+}
+
+/* Lapis chrome — the masthead and footer become lapis lazuli flecked with gold
+ * pyrite, echoing the raw stone. Header/footer text stays white/legible. */
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-footer,
+[data-md-color-scheme="slate"] .md-footer-meta {
+  background-color: var(--pantheon-lapis-deep);
+  background-image: var(--pantheon-fleck);
+  background-size: var(--pantheon-fleck-size);
+}

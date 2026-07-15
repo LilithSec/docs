@@ -6,18 +6,27 @@ edit_uri: ""
 
 theme:
   name: material
+  # Disable Material's Google Fonts loader — no requests to fonts.googleapis.com
+  # or fonts.gstatic.com. Headings use self-hosted Cinzel (docs/fonts/, wired up
+  # in stylesheets/pantheon.css); body/nav/code fall back to the local system
+  # stack.
+  font: false
+  # Deep purple + gold/amber "pantheon" palette. The dark base is Material's
+  # built-in `slate` scheme; the exact colors (purple-tinted grays, gold accent
+  # and links) are set in docs/stylesheets/pantheon.css via extra_css below.
   palette:
     scheme: slate
     primary: deep purple
-    accent: purple
   features:
-    - navigation.sections
     - navigation.indexes
     - navigation.top
     - navigation.tracking
     - content.code.copy
     - search.suggest
     - search.highlight
+
+extra_css:
+  - stylesheets/pantheon.css
 
 # Rewrites github.com/<org>/<repo> cross-links into internal section links when
 # that repo is part of this site. Keyed on bare repo name, so it survives both
@@ -38,7 +47,6 @@ markdown_extensions:
 # The per-component sections below (lilith/, lilu/, ...) are populated by
 # scripts/sync-docs.sh, which pulls each repo's docs/ dir. Run that before
 # building. Page titles come from each page's H1, so only paths are listed.
-# Virani is authored locally in docs/virani/ (no upstream docs/ yet).
 nav:
   - Home: index.md
   - The Pantheon: pantheon.md
@@ -74,6 +82,47 @@ nav:
       - ereshkigal/install.md
       - ereshkigal/configuration.md
       - ereshkigal/usage.md
+      # Kurs: kurs.md is the section landing page (navigation.indexes); the
+      # backend pages follow the curated order from kurs.md, not alphabetical.
+      - Kurs:
+          - ereshkigal/kurs.md
+          - ereshkigal/kurs/gate.md
+          - ereshkigal/kurs/dummy.md
+          - ereshkigal/kurs/pf.md
+          - ereshkigal/kurs/ipfw.md
+          - ereshkigal/kurs/iptables.md
+          - ereshkigal/kurs/nftables.md
+          - ereshkigal/kurs/firewalld.md
+          - ereshkigal/kurs/ufw.md
+          - ereshkigal/kurs/shorewall.md
+          - ereshkigal/kurs/npf.md
+          - ereshkigal/kurs/route.md
+          - ereshkigal/kurs/xdp.md
+          - ereshkigal/kurs/hosts_deny.md
+          - ereshkigal/kurs/routeros.md
+          - ereshkigal/kurs/routeros_api.md
+          - ereshkigal/kurs/opnsense.md
+          - ereshkigal/kurs/pfsense.md
+          - ereshkigal/kurs/vyos.md
+          - ereshkigal/kurs/panos.md
+          - ereshkigal/kurs/fortigate.md
+          - ereshkigal/kurs/cisco_fmc.md
+          - ereshkigal/kurs/checkpoint.md
+          - ereshkigal/kurs/juniper_srx.md
+          - ereshkigal/kurs/f5_bigip.md
+          - ereshkigal/kurs/netscaler.md
+          - ereshkigal/kurs/bgp_rtbh.md
+          - ereshkigal/kurs/cloudflare.md
+          - ereshkigal/kurs/fastly.md
+          - ereshkigal/kurs/akamai.md
+          - ereshkigal/kurs/aws_wafv2.md
+          - ereshkigal/kurs/cloud_armor.md
+          - ereshkigal/kurs/azure.md
+          - ereshkigal/kurs/nsupdate.md
+          - ereshkigal/kurs/dns_rpz.md
+          - ereshkigal/kurs/abuseipdb.md
+          - ereshkigal/kurs/file_reload.md
+          - ereshkigal/kurs/shell.md
       - ereshkigal/security.md
       - ereshkigal/examples.md
   - Lamashtu:
@@ -86,6 +135,14 @@ nav:
       - lamashtu/examples.md
   - Virani:
       - virani/index.md
+      - virani/architecture.md
+      - virani/install.md
+      - virani/configuration.md
+      - virani/usage.md
+      - virani/cache.md
+      - virani/host-pruning.md
+      - virani/security.md
+      - virani/examples.md
   - Nisaba:
       - nisaba/index.md
       - nisaba/architecture.md

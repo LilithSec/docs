@@ -43,3 +43,21 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         return f"{BASE}/{section}/" if section else m.group(0)
 
     return _RE.sub(repl, markdown)
+
+
+# Per-deity accent theming. Each component section lives under its own top-level
+# directory (lamashtu/, ereshkigal/, ...); we stamp that slug onto the page's
+# <body> so docs/stylesheets/pantheon.css can key each deity's accent color off
+# [data-deity="..."]. Root pages (index.md, pantheon.md) are left un-stamped and
+# fall back to the site-wide gold accent.
+DEITIES = set(NAME_TO_SECTION.values())
+
+_BODY_RE = re.compile(r"<body(?=[\s>])")
+
+
+def on_post_page(output, page, config, **kwargs):
+    src = getattr(page.file, "src_uri", page.file.src_path)
+    slug = src.split("/", 1)[0]
+    if slug not in DEITIES:
+        return output
+    return _BODY_RE.sub(f'<body data-deity="{slug}"', output, count=1)
