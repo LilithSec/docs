@@ -155,3 +155,10 @@ nav:
       - nisaba/web.md
       - nisaba/Sukkal.md
       - nisaba/examples.md
+  - Allani:
+      - allani/index.md
+      - allani/architecture.md
+      - allani/install.md
+      - allani/configuration.md
+      - allani/usage.md
+      - allani/syslog-ng.md

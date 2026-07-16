@@ -22,6 +22,7 @@ REPOS=(
   "lamashtu    LilithSec/Lamashtu      main"
   "virani      LilithSec/Virani        main"
   "nisaba      VVelox/Plugtools        dev"    # docs live on dev; -> LilithSec/Nissaba after rename
+  "allani      LilithSec/Allani        main"
 )
 
 tmp="$(mktemp -d)"

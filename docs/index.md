@@ -26,6 +26,10 @@ together.
 - **[Nisaba](https://github.com/VVelox/Plugtools)** — the scribe. LDAP user,
   group, and netgroup manager; the record keeper of who exists and what marks of
   trust they carry.
+- **[Allani](https://github.com/LilithSec/Allani)** — Lady of the Dark Earth,
+  kin to Ereshkigal. A syslog store in place of Logstash + Elasticsearch:
+  syslog-ng hands her every log line as JSON and she lays it to rest in
+  PostgreSQL. Where Lilith keeps only the alerts, Allani keeps them all.
 
 New here? Start with **[The Pantheon](pantheon.md)** for how they fit together,
 then dive into whichever daemon you need.

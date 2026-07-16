@@ -32,6 +32,7 @@ NAME_TO_SECTION = {
     "Plugtools": "nisaba",
     "Nissaba": "nisaba",
     "Nisaba": "nisaba",
+    "Allani": "allani",
 }
 
 _RE = re.compile(r"https://github\.com/[\w.-]+/([\w.-]+?)/?(?=[)\s>\"]|$)")

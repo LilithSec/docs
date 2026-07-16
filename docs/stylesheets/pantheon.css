@@ -201,6 +201,16 @@
   --md-typeset-a-color:              #d9b44a;
 }
 
+/* Allani — Lady of the Dark Earth, chthonic sun of the world below; a
+ * burnished bronze / buried-sun amber, kept browner and deeper than Nisaba's
+ * bright gold and warmer-muted than Baphomet's ember so the two never read
+ * the same. */
+[data-deity="allani"] {
+  --md-accent-fg-color:              #cf9040;
+  --md-accent-fg-color--transparent: rgba(207, 144, 64, 0.1);
+  --md-typeset-a-color:              #dda85f;
+}
+
 /* Tint section headings to the active deity's accent. The h1 (section/page
  * title) takes the full accent color; h2/h3 keep legible default text but get an
  * accent-tinted rule beneath them as section dividers (h3 a touch lighter than
@@ -244,6 +254,7 @@
 .md-nav__link[href*="lamashtu/"]   { --nav-accent: #b2d98a; }
 .md-nav__link[href*="virani/"]     { --nav-accent: #82b4ff; }
 .md-nav__link[href*="nisaba/"]     { --nav-accent: #d9b44a; }
+.md-nav__link[href*="allani/"]     { --nav-accent: #dda85f; }
 
 .md-nav__link { color: var(--nav-accent, inherit); }
 

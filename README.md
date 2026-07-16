@@ -41,6 +41,7 @@ page's H1, so only paths are listed).
 | Lamashtu | `LilithSec/Lamashtu` | main | |
 | Virani | (local) | — | no upstream `docs/` yet; hosted in `docs/Virani/` |
 | Nisaba | `VVelox/Plugtools` | **dev** | docs only on `dev`; rename to `LilithSec/Nissaba` pending |
+| Allani | `LilithSec/Allani` | main | |
 
 To wire in a new component, add an `!import` line to `nav:` in `mkdocs.yml` and
 (if it cross-links) an entry to `hooks/pantheon_links.py`.
