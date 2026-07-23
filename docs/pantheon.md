@@ -25,7 +25,7 @@ dark earth, receiving everything that falls.
 
 ```mermaid
 flowchart TB
-  sensors["Suricata / Sagan<br/>CAPEv2 sandbox"]
+  sensors["Suricata / Baphomet<br/>CAPEv2 sandbox"]
   wire(["network traffic"])
   logs["log files"]
   syslog(["host &amp; daemon logs<br/>syslog-ng · JSON"])
@@ -37,8 +37,8 @@ flowchart TB
     Allani["Allani"]
     DB[("PostgreSQL")]
     Lilu --> DB
-    Lilith --> DB
-    Allani --> DB
+    Lilith <--> DB
+    Allani <--> DB
   end
 
   subgraph pkt["Packets — capture &amp; retrieval"]
@@ -47,7 +47,7 @@ flowchart TB
     Virani["Virani"]
     PCAP[("pcap hoard")]
     Lamashtu --> PCAP
-    Virani --> PCAP
+    PCAP --> Virani
   end
 
   subgraph enf["Enforcement"]
@@ -65,11 +65,11 @@ flowchart TB
   syslog -->|JSON via syslog-ng| Allani
   wire --> Lamashtu
   logs --> Baphomet
-  Lilith -.->|fetch flow behind an alert| Virani
+  Baphomet -->|EVE| know
+  Lilith <-.->|fetch flow behind an alert| Virani
 
-  Nisaba -.-> Lilith
-  Nisaba -.-> Baphomet
-  Nisaba -.-> Ereshkigal
+  Nisaba <-.-> Lilith
+  Nisaba <-.-> enf
 
   classDef daemon fill:#3b2a52,stroke:#b98fe0,stroke-width:1px,color:#f4f4f4;
   classDef store fill:#1f2d3d,stroke:#6fb1d6,color:#eaeaea;
@@ -81,7 +81,9 @@ flowchart TB
 
 **Detection → the annals.** [Suricata](https://suricata.io/) and
 [Sagan](https://github.com/quadrantsec/sagan) raise the cries; the sandbox
-([CAPEv2](https://github.com/kevoreilly/CAPEv2)) adds detonation reports.
+([CAPEv2](https://github.com/kevoreilly/CAPEv2)) adds detonation reports;
+[Baphomet](https://github.com/VVelox/Baphomet), watching logs, raises cries of
+its own — all of them speaking EVE.
 [Lilith](https://github.com/LilithSec/Lilith) gathers all of it into PostgreSQL
 and consults it. On sensor boxes that hold no court of their own,
 [Lilu](https://github.com/LilithSec/App-Lilu) does just the carrying — writing
@@ -100,7 +102,10 @@ she kept.
 logs the way fail2ban does, counts each IP's offenses, and when one crosses the
 line sends a ban request to
 [Ereshkigal](https://github.com/LilithSec/Ereshkigal), who does the actual
-firewalling. Baphomet accuses; Ereshkigal punishes.
+firewalling. Baphomet accuses; Ereshkigal punishes. What Baphomet sees it also
+tells: it emits EVE from the offenses it counts, feeding the annals the same way
+the sensors do — so a log line that earns a ban is also written down among the
+knowing.
 
 **Underneath all of it,** [Nisaba](https://github.com/VVelox/Plugtools) keeps
 the rolls — the LDAP `posixAccount`, `posixGroup`, and `nisNetgroup` entries and
